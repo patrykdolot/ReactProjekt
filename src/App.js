@@ -9,7 +9,8 @@ import AutoCompleteText from './components/AutoCompleteText';
 import ClientList from './components/ClientList'
 import Login from './components/layout/Login';
 import productList from './components/productList';
-
+import AddProduct from './components/layout/AddProduct';
+import ProductDetails from './components/layout/ProductDetails';
 
 
 class App extends Component {
@@ -44,13 +45,14 @@ class App extends Component {
         <Route path="/orderList" component={IndexWarehouse}></Route> 
 
 
-        <Route path="/productAdd" component={IndexWarehouse}></Route> 
-        <Route path="/productList" component={IndexWarehouse}></Route> 
+        <Route path="/productAdd" component={AddProduct}></Route> 
+        <Route path="/productList" component={productList}></Route> 
         <Route path="/returnAdd" component={IndexWarehouse}></Route> 
 
         <Route  path="/editClient/:id" component={AutoCompleteText}></Route>
         <Route  path="/deleteClient/:id" component={AutoCompleteText}></Route>
 
+        <Route  path="/productDetails/:id" component={ProductDetails}></Route>
       </Router>
       
     );

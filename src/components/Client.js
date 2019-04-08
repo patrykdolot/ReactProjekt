@@ -1,4 +1,4 @@
-import React from 'react'
+    import React from 'react'
 import {Button} from 'react-bootstrap';
 import {Link } from "react-router-dom"
 class Client extends React.Component
@@ -6,6 +6,7 @@ class Client extends React.Component
   
     render()
     {
+        console.log(this.props.client)
         return(
             <tr>
             <th> {this.props.client.id}</th>

@@ -1,0 +1,14 @@
+#naglowek{
+    text-align: center;
+    width: 100%;
+}
+
+#addButton{
+    display: inline-block;
+    
+}
+
+#divSend{
+    width: 100%;
+    text-align: center;
+}

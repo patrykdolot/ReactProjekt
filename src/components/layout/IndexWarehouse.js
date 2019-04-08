@@ -15,7 +15,7 @@ import Klienci from './IndexClients'
      <Card.Text>
      Lista wszystkich produktow
      </Card.Text>
-     <Link exact to={'/productAdd'}> <Button variant="primary">Idz</Button></Link>
+     <Link exact to={'/productList'}> <Button variant="primary">Idz</Button></Link>
  </Card.Body>
  
 
@@ -28,7 +28,7 @@ import Klienci from './IndexClients'
      <Card.Text>
       formularz dodawania produktu
      </Card.Text>
-    <Link exact to={'/productList'}> <Button variant="primary">Idz</Button></Link>
+    <Link exact to={'/productAdd'}> <Button variant="primary">Idz</Button></Link>
  </Card.Body>
  </Card>
 

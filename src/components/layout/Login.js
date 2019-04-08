@@ -61,14 +61,15 @@ function getData() {
 	}
     console.log(dane)
     
-    fetch( conf.servername, {
+    var nServer = conf.servername + "auth";
+    fetch( nServer, {
         method: 'Post',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(dane)
     })
-    .then(response => {
+    .then(response => { 
         //console.log(response.json() + "aa")
         if(response.ok){
             response.json().then(json => {
@@ -78,13 +79,6 @@ function getData() {
                 document.cookie = `tokenWareHouse=${json.token}; expires=${dateExpired.toGMTString()}`;
                 window.location.reload();
               });
-            //console.log("ok");
-            //console.log(JSON.stringify(response));
-            //console.log(response.json().status + " df");
-            
-            //document.cookie = `tokenWareHouse=${response.token}` ;     
-            
-            //window.location.reload();
         } else {
             console.log("no");
             if(response.status == 401){
