@@ -6,7 +6,7 @@ import Klienci from './IndexClients'
  function IndexWarehouse() {
          
   return (
-    <div style={{paddingTop:'15%',width:'96%',marginLeft:'2%'}}>
+    <div style={{paddingTop:'10%',width:'96%',marginLeft:'2%'}}>
     <CardDeck>
      <Card className="text-center">
  <Card.Header>Produkty</Card.Header>
@@ -26,7 +26,7 @@ import Klienci from './IndexClients'
  <Card.Body>
      <Card.Title>Dodaj produkt</Card.Title>
      <Card.Text>
-      formularz dodawania produktu
+      Formularz dodawania produktu
      </Card.Text>
     <Link exact to={'/productAdd'}> <Button variant="primary">Idz</Button></Link>
  </Card.Body>
@@ -41,6 +41,31 @@ import Klienci from './IndexClients'
      </Card.Text>
     
      <Link exact to={'/returnAdd'}> <Button variant="primary">Idz</Button></Link>
+ </Card.Body>
+ </Card>
+ 
+ <Card className="text-center">
+ <Card.Header>Historia Zamówień</Card.Header>
+ <Card.Body>
+     <Card.Title>Wyświetl zamówienia</Card.Title>
+     <Card.Text>
+     Lista wszystkich zamówień
+     </Card.Text>
+    
+     <Link exact to={'/orderHistory'}> <Button variant="primary">Idz</Button></Link>
+ </Card.Body>
+ </Card>
+ </CardDeck>
+ <br/>
+ <CardDeck>
+     <Card className="text-center">
+ <Card.Header>Pracownicy</Card.Header>
+ <Card.Body>
+     <Card.Title>Lista pracowników</Card.Title>
+     <Card.Text>
+     Dodawanie, wyświetlanie pracowników
+     </Card.Text>
+     <Link exact to={'/WorkerList'}> <Button variant="primary">Idz</Button></Link>
  </Card.Body>
  </Card>
  </CardDeck>

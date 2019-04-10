@@ -45,6 +45,10 @@ function AddProduct() {
                             <input class="form-control" type="number" id="quantityProduct" />
                         </div>
                         <div class="form-group">
+                            <label>Ilość produktu w paczce</label>
+                            <input class="form-control" type="number" id="quantityPack" />
+                        </div>
+                        <div class="form-group">
                             <label>Kod kreskowy</label>
                             <input type="text" class="form-control" id="barCodeProdcut" placeholder="np. 000004" />
                         </div>
@@ -74,8 +78,13 @@ function getData() {
     var quantityProduct = document.getElementById('quantityProduct').value;
     var barCodeProdcut = document.getElementById('barCodeProdcut').value;
     var barCodeLocationProdcut = document.getElementById('barCodeLocationProdcut').value;
+    var quantityPack = document.getElementById('quantityPack').value;
 
-    if(nameProduct === ""  || typeProducktSelect === "" || producentProduct === "" || priceProduct === "" || quantityProduct === "" || barCodeProdcut === "" || barCodeLocationProdcut === ""){
+    if(parseInt(quantityProduct)%parseInt(quantityPack) != 0){
+        alert("Podano złą ilość na palecie i w paczce")
+        return
+    }
+    if(nameProduct === ""  || typeProducktSelect === "" || producentProduct === "" || priceProduct === "" || quantityProduct === "" || barCodeProdcut === "" || barCodeLocationProdcut === "" || quantityPack === ""){
 		alert("Puste pole");
 		return;
     }
@@ -90,6 +99,7 @@ function getData() {
         "name": nameProduct,
         "logicState": 0,
         "category": typeProducktSelect,
+        "amountInAPack" : quantityPack,
         "staticLocation": 
             {
                 "id": 1,

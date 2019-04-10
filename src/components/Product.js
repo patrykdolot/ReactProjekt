@@ -21,7 +21,7 @@ class Product extends React.Component
             <th> {this.props.product.quantityInPackage}</th>
             <th> {this.props.product.barCode}</th>
             <th> {this.props.product.staticLocation.barCodeLocation}</th>
-            <th><Link to={'/productDetails/'+this.props.product.id}><Button variant="success">Szczegóły</Button> </Link><Link to={'/deleteClient/'+this.props.product.id}> <Button variant="danger">Delete</Button></Link></th>
+            <th><Link to={'/productDetails/'+this.props.product.id}><Button variant="success">Szczegóły</Button> </Link><Link to={'/deleteClient/'+this.props.product.id}> <Button variant="danger">Edycja</Button></Link></th>
             </tr>
         )
 

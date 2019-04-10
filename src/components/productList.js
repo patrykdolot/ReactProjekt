@@ -15,6 +15,9 @@ class productList extends Component {
   state = {
       clients:[
       
+      ],
+      details:[
+
       ]
       ,
       draft:''
@@ -49,7 +52,7 @@ class productList extends Component {
       ).then(response => {
           if(response.ok) {
               response.json().then(json => this.setState({clients:json}))
-              //console.log(this.state.clients)
+
           }
           else {
             console.log("no");
@@ -73,7 +76,7 @@ class productList extends Component {
       
       <div>
           
-        <Button variant="primary" onClick={this.loadClients}>Primary</Button>
+        {/* <Button variant="primary" onClick={this.loadClients}>Primary</Button> */}
         <Table striped bordered hover>
 
           <thead>
