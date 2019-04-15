@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import Api from '../helpers/api'
 import {Link} from 'react-router-dom';
 import {Table,Button} from 'react-bootstrap';
-import Client from './Client'
+import Client from './Client';
+import { conf } from '../layout/config/config'
+
 
  class ClientList extends Component {
 
@@ -22,23 +23,7 @@ import Client from './Client'
 
     componentDidMount = () =>
     {
-        fetch('https://mpsdistribution.herokuapp.com/auth',{
-            method: 'POST',
-            headers:{
-                "Content-Type":'application/json'
-            },
-            body:JSON.stringify( {
-                "username": "admin",
-                "password": "qwerty"
-            })
-        }
-        ).then(response => {
-            if(response.ok) {
-                console.log("OK")
-                response.json().then(json => this.setState({draft:json}))
-               
-            }
-        }) 
+       this.loadClients();
 
     
         
@@ -46,11 +31,14 @@ import Client from './Client'
 
     loadClients =  ()  =>
     {
-        fetch('https://mpsdistribution.herokuapp.com/client/findAll',{
+        
+        var nameS = conf.servername + "client/findAll"
+        
+          fetch(nameS,{
             method: 'GET',
             headers:{
                 "Content-Type":'application/json',
-                'Authorization': 'Bearer ' + this.state.draft.token
+                'Authorization': 'Bearer ' + this.getCookie("tokenWareHouse")
             }
         }
         ).then(response => {
@@ -58,42 +46,47 @@ import Client from './Client'
                 response.json().then(json => this.setState({clients:json}))
             }
         })
-        console.log(this.state.clients)
+  
     }
-    
+
+    getCookie(name) {
+        var value = "; " + document.cookie;
+        var parts = value.split("; " + name + "=");
+        if (parts.length == 2) return parts.pop().split(";").shift();
+      }
     
 
     render() {
         return (
             
         <div>
-            
              <Button variant="primary" onClick={this.loadClients}>Primary</Button>
-         <Table striped bordered hover>
+         <Table striped bordered hover >
          
-            <thead>
+         
+            <thead >
                 <tr>
                 <th>#</th>
-                <th>Company Name</th>
+                <th>Nazwa firmy</th>
                 <th>Nip</th>
-                <th>Zip Code</th>
-                <th>Adress</th>
-                <th>Phone Number</th>
+                <th>Kod pocztowy</th>
+                <th>Adres</th>
+                <th>Numer telefonu</th>
                 <th></th>
                 </tr>
             </thead>
 
             <tbody>
                 
-               {this.state.clients.map((client)=>
+               {this.state.clients.map((filtrowanyClient)=>
                 {
-                    return <Client client={client}/>
+                    return <Client client={filtrowanyClient} id={this.props.match.params.id}/>
                 })}
               
                 </tbody>
 
             </Table>
-                    
+                   {console.log(this.props.match.params.id)} 
     </div>
         )}
 }

@@ -4,18 +4,26 @@ import {Link } from "react-router-dom"
 class Client extends React.Component
 {
   
+    getStyles = () =>
+    {
+        if(this.props.client.id==this.props.id)
+        {
+            return {backgroundColor:'#98FB98'}
+        }
+    }
     render()
     {
-        console.log(this.props.client)
+      
         return(
-            <tr>
+           
+            <tr style={this.getStyles()}>
             <th> {this.props.client.id}</th>
             <th> {this.props.client.companyName}</th>
             <th> {this.props.client.nip}</th>
             <th> {this.props.client.zipCode}</th>
             <th> {this.props.client.address}</th>
             <th> {this.props.client.phoneNo}</th>
-            <th><Link to={'/editClient/'+this.props.client.id}><Button variant="success">Edit</Button> </Link><Link to={'/deleteClient/'+this.props.client.id}> <Button variant="danger">Delete</Button></Link></th>
+            <th><Link to={'/ordersClient/'+this.props.client.id}> <Button variant="info">Zamówienia</Button></Link> <Link to={'/editClient/'+this.props.client.id}><Button variant="success">Edytuj</Button> </Link></th>
             </tr>
         )
 
