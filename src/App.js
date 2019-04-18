@@ -5,7 +5,7 @@ import Header from './components/layout/Header'
 import Index from './components/layout/Index';
 import IndexClients from './components/layout/IndexClients';
 import IndexWarehouse from './components/layout/IndexWarehouse';
-import AutoCompleteText from './components/AutoCompleteText';
+import AutoCompleteText from './components/Order/AutoCompleteText';
 import ClientList from './components/Client/ClientList'
 import Login from './components/layout/Login';
 import productList from './components/productList';
@@ -23,7 +23,7 @@ class App extends Component {
     var cookie = "tokenWareHouse"
     var re = new RegExp('[; ]'+cookie+'=([^\\s;]*)');
     var cookieVal = unescape((' '+document.cookie).match(re));
-    //console.log("a" + cookieVal + "a");
+  
     if(cookieVal == "null"){
       return(
         <Router>           
@@ -60,7 +60,8 @@ class App extends Component {
         <Route  path="/productDetails/:id" component={ProductDetails}></Route>
 
         <Route path="/selectClient" component={ClientOrder}></Route>
-        <Route  path="/newOrder/:id" component={NewOrder}></Route>
+        <Route  path="/newOrder" component={NewOrder}></Route>
+        
       </Router>
       
     );

@@ -24,9 +24,6 @@ import { conf } from '../layout/config/config'
     componentDidMount = () =>
     {
        this.loadClients();
-
-    
-        
     }
 
     loadClients =  ()  =>
@@ -55,12 +52,17 @@ import { conf } from '../layout/config/config'
         if (parts.length == 2) return parts.pop().split(";").shift();
       }
     
+      sprawdzian = () =>
+      {
+          this.setState({clients:{'companyName':'LOLOLO'}})
+      }
 
     render() {
         return (
             
         <div>
              <Button variant="primary" onClick={this.loadClients}>Primary</Button>
+             <Button variant="primary" onClick={this.sprawdzian}>sprawdz</Button>
          <Table striped bordered hover >
          
          
