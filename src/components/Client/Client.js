@@ -6,7 +6,7 @@ class Client extends React.Component
   
     getStyles = () =>
     {
-        if(this.props.client.id==this.props.id)
+        if(this.props.client.id===this.props.id)
         {
             return {backgroundColor:'#98FB98'}
         }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
 import {Table,Button} from 'react-bootstrap';
 import Client from './Client';
 import { conf } from '../layout/config/config'
@@ -8,10 +7,7 @@ import { conf } from '../layout/config/config'
  class ClientList extends Component {
 
 
-    constructor()
-    {
-        super();
-    }
+
 
     state = {
         clients:[
@@ -49,7 +45,7 @@ import { conf } from '../layout/config/config'
     getCookie(name) {
         var value = "; " + document.cookie;
         var parts = value.split("; " + name + "=");
-        if (parts.length == 2) return parts.pop().split(";").shift();
+        if (parts.length === 2) return parts.pop().split(";").shift();
       }
     
       sprawdzian = () =>

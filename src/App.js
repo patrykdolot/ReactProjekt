@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom"
+import { BrowserRouter as Router, Route} from "react-router-dom"
 import Header from './components/layout/Header'
 import Index from './components/layout/Index';
 import IndexClients from './components/layout/IndexClients';
@@ -24,7 +24,7 @@ class App extends Component {
     var re = new RegExp('[; ]'+cookie+'=([^\\s;]*)');
     var cookieVal = unescape((' '+document.cookie).match(re));
   
-    if(cookieVal == "null"){
+    if(cookieVal === "null"){
       return(
         <Router>           
           <Route component={Login} exact/>

@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import {Formik} from 'formik'
 import {conf} from '../layout/config/config'
-import {Form,Table,Button} from 'react-bootstrap';
+import {Form,Button} from 'react-bootstrap';
 import {withRouter} from 'react-router-dom'
 class NewClient extends Component {
 
   getCookie(name) {
     var value = "; " + document.cookie;
     var parts = value.split("; " + name + "=");
-    if (parts.length == 2) return parts.pop().split(";").shift();
+    if (parts.length === 2) return parts.pop().split(";").shift();
   }
   render() {
     return (

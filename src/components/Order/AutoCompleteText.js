@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import {Modal,Button,Overlay,Popover} from 'react-bootstrap';
+import {Modal,Button,Table} from 'react-bootstrap';
 import {conf} from '../layout/config/config'
-import  ScrollArea from 'react-scrollbar'
+
 export default class AutoCompleteText extends Component {
     constructor(props){
         super(props);
@@ -12,7 +12,7 @@ export default class AutoCompleteText extends Component {
             productInfo:{},
             howMany:10,
             showPopOver:false,
-            inputValue:''
+            inputValue:'',
         };
         
     this.handleShow = this.handleShow.bind(this);
@@ -23,7 +23,7 @@ export default class AutoCompleteText extends Component {
     getCookie(name) {
       var value = "; " + document.cookie;
       var parts = value.split("; " + name + "=");
-      if (parts.length == 2) return parts.pop().split(";").shift();
+      if (parts.length === 2) return parts.pop().split(";").shift();
     }
 
     handleClose= () =>{ 
@@ -45,21 +45,16 @@ export default class AutoCompleteText extends Component {
     }
 
     onTextChanged = (e) =>{
-      this.setState({inputValue:e.target.value})
+      
 
         let suggestions=[];
-        let target = e.target;
-        if(this.state.inputValue.length>0){
-            const regex = new RegExp(`^${this.state.inputValue}`,'i')
+        if(e.target.value.length>0){
+            const regex = new RegExp(`^.*${e.target.value}.*$`,'i')
             suggestions = this.props.products.sort().filter(v => 
                regex.test(v.name))
         }
             this.setState(()=>({suggestions}))
-            console.log("Dlugosc = "+this.state.suggestions.length)
-            if(this.state.suggestions.length>0)
-            {
-              this.setState(s=>({target,showPopOver:true}))
-            }
+            this.setState({inputValue:e.target.value})
      }
 
      renderSuggestions(){
@@ -68,28 +63,20 @@ export default class AutoCompleteText extends Component {
             return null;
         }
         return(
-          <Overlay
-          show={this.state.showPopOver}
-          target={this.state.target}
-          placement='bottom'
-          container={this}
-          
-        >
-          <Popover id="popover-contained" title="Produkt"  >
-
-          <ScrollArea
-            speed={0.8}
-            className="area"
-            contentClassName="content"
-            horizontal={false}
-            >
+         
+         <div style={{marginLeft:'25%',textAlign:'center',position:'fixed',backgroundColor:"#FFFFFF",overflowY:'scroll',maxHeight:'197px',width:'50%'}}>
+           
+             <Table  bordered hover>
+             <tbody>
             {suggestions.map((item)=> 
-                 <div onClick={()=>{ this.onItemCliked(item)}}>{item.name}</div>)}
-
-            </ScrollArea>
-          </Popover>
-        </Overlay>
-                 
+            <tr>
+                 <th onClick={()=>{ this.onItemCliked(item)}}>{item.name}</th>
+                 </tr>)
+            }
+            </tbody>
+                </Table>
+           
+            </div>     
              
         );
      }
@@ -97,6 +84,7 @@ export default class AutoCompleteText extends Component {
      onItemCliked = (item) => {
       this.setState({showPopOver:!this.state.showPopOver})
            this.setState({inputValue:''})
+           this.setState({suggestions:[]})
            this.setState({product:item})
            this.showDialogWithData(item)
      }
@@ -134,7 +122,7 @@ export default class AutoCompleteText extends Component {
     return (
       // Wpisywanie
       <div className="AutoCopleteText" style={{textAlign:'center',marginTop:'2%',marginBottom:'2%'}}>
-        <input style={{width:'50%'}} onChange={this.onTextChanged}  value={this.state.inputValue} type="text"/>
+        <input style={{width:'50%'}} onChange={this.onTextChanged} placeholder="Wprowadz nazwe"  value={this.state.inputValue} type="text"/>
         {this.renderSuggestions()}
 
 

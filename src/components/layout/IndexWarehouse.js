@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from "react-router-dom"
 import {Card,Button,CardDeck} from 'react-bootstrap';
-import Klienci from './IndexClients'
 
  function IndexWarehouse() {
          
