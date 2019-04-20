@@ -4,6 +4,7 @@ import {conf} from '../layout/config/config'
 import AutoCompleteText from './AutoCompleteText';
 import {Table,Button,Modal,Form} from 'react-bootstrap';
 import * as R from 'ramda'
+
 import {Formik} from 'formik'
 export default class NewOrder extends Component {
 
@@ -64,7 +65,9 @@ handleCloseSuccess = () =>
 handleShow(){ 
           this.setState({ show: true });      
 }
-  editProductsQuantity = (product) => {
+
+
+editProductsQuantity = (product) => {
     this.setState({productIdToChange:product.id})
     this.setState({howMany:product.quantity})
     var nameS = conf.servername + "Product/getInfoAboutProduct"
@@ -100,13 +103,19 @@ handleShow(){
           if(product.id===item.id)
           {
             console.log("powinno zmienc")
-            product.quantity+=item.quantity
+            product.quantity=product.quantity+item.quantity
           }
         })
         this.setState({products:products2})
         console.log(item)
     }
   }
+
+  deleteProductFromList = (product1) => {
+    this.setState({products: this.state.products.filter((product)=> { 
+      return product !== product1
+  })});
+  } 
  
   render() {
     var counter=0;
@@ -129,7 +138,8 @@ handleShow(){
                         <th>{counter}</th>
                         <th>{this.state.productsList[R.findIndex(R.propEq('id',product.id))(this.state.productsList)].name}</th>
                         <th>{product.quantity}</th>
-                        <th><Button onClick={()=>{this.editProductsQuantity(product)}}>Edytuj</Button></th>
+                        <th><Button  variant="secondary" onClick={()=>{this.editProductsQuantity(product)}}>Edytuj</Button>{" "
+                         }<Button  variant="danger"onClick={()=>{this.deleteProductFromList(product)}}>Usun</Button></th>
                         </tr> 
                         )
                       
@@ -158,7 +168,7 @@ render={({
             isSubmitting
         }) =>(
           <Form.Group style={{display:'inline',float:'left'}} >
-          <p><Form.Control type="text" name='nip' onChange={handleChange} isInvalid={!!errors.nip} value={values.nip}/> {"/"} {this.state.productInfo.logicState }</p>
+          <p><Form.Control type="text" name='nip' onChange={this.changeHandler} isInvalid={!!errors.nip} value={this.state.howMany}/> {"/"} {this.state.productInfo.logicState }</p>
           <Form.Control.Feedback type="invalid">
                {errors.nip}
             </Form.Control.Feedback>

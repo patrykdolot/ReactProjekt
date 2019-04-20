@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import {Modal,Button,Table} from 'react-bootstrap';
 import {conf} from '../layout/config/config'
-
-export default class AutoCompleteText extends Component {
+import onClickOutside from "react-onclickoutside";
+ class AutoCompleteText extends Component {
     constructor(props){
         super(props);
         this.state={
@@ -57,6 +57,10 @@ export default class AutoCompleteText extends Component {
             this.setState({inputValue:e.target.value})
      }
 
+     handleClickOutside = () => {
+      console.log('onClickOutside() method called')
+    }
+
      renderSuggestions(){
         const {suggestions} = this.state;
         if(suggestions.length===0){
@@ -64,7 +68,7 @@ export default class AutoCompleteText extends Component {
         }
         return(
          
-         <div style={{marginLeft:'25%',textAlign:'center',position:'fixed',backgroundColor:"#FFFFFF",overflowY:'scroll',maxHeight:'197px',width:'50%'}}>
+         <div onHide={this.handleClose} style={{marginLeft:'25%',textAlign:'center',position:'fixed',backgroundColor:"#FFFFFF",overflowY:'scroll',maxHeight:'197px',width:'50%'}}>
            
              <Table  bordered hover>
              <tbody>
@@ -157,3 +161,4 @@ export default class AutoCompleteText extends Component {
 }
 
 
+export default onClickOutside(AutoCompleteText)
