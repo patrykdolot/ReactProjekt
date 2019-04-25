@@ -35,7 +35,7 @@ import Klienci from './IndexClients'
  <Card className="text-center">
  <Card.Header>Zawroty</Card.Header>
  <Card.Body>
-     <Card.Title>Dodaj zwrot</Card.Title>
+     <Card.Title>Dodaj zwrot/dostawę</Card.Title>
      <Card.Text>
      Formularz dodawania zwrotu
      </Card.Text>
@@ -45,11 +45,11 @@ import Klienci from './IndexClients'
  </Card>
  
  <Card className="text-center">
- <Card.Header>Historia Zamówień</Card.Header>
+ <Card.Header>Historia Dostaw</Card.Header>
  <Card.Body>
-     <Card.Title>Wyświetl zamówienia</Card.Title>
+     <Card.Title>Wyświetl dostawy</Card.Title>
      <Card.Text>
-     Lista wszystkich zamówień
+     Lista wszystkich dostaw
      </Card.Text>
     
      <Link exact to={'/orderHistory'}> <Button variant="primary">Idz</Button></Link>
