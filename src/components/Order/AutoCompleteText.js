@@ -33,11 +33,19 @@ import onClickOutside from "react-onclickoutside";
 
     handleCloseSuccess = () =>
     {
+      if(this.state.howMany<1)
+      {
+        this.handleClose()
+      }
+      else
+      {
         var item = {"id":this.state.productInfo.id,
                     "quantity":this.state.howMany}
 
         this.props.addToList(item)
         this.handleClose()
+      }
+
     }
     
     handleShow(){ 
@@ -58,7 +66,8 @@ import onClickOutside from "react-onclickoutside";
      }
 
      handleClickOutside = () => {
-      console.log('onClickOutside() method called')
+      this.setState({inputValue:''})
+      this.setState({suggestions:[]})
     }
 
      renderSuggestions(){
@@ -86,7 +95,6 @@ import onClickOutside from "react-onclickoutside";
      }
 
      onItemCliked = (item) => {
-      this.setState({showPopOver:!this.state.showPopOver})
            this.setState({inputValue:''})
            this.setState({suggestions:[]})
            this.setState({product:item})
@@ -117,9 +125,17 @@ import onClickOutside from "react-onclickoutside";
 
      
     changeHandler = event =>{
-      this.setState({
-            howMany:event.target.value
-          })
+      if(event.target.value<this.state.productInfo.logicState)
+      {
+        this.setState({
+          howMany:event.target.value
+        })
+      }else{
+        this.setState({
+          howMany:this.state.productInfo.logicState
+        })
+      }
+  
     }
     
   render() {

@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
 import {conf} from '../layout/config/config'
+import ClientListOrder from './ClientListOrder'
 import AutoCompleteText from './AutoCompleteText';
 import {Table,Button,Modal,Form} from 'react-bootstrap';
 import * as R from 'ramda'
@@ -16,6 +17,15 @@ export default class NewOrder extends Component {
     howMany:'',
     productIdToChange:''
   }
+
+
+
+
+
+
+
+
+
 
   componentDidMount = () =>{
     this.getProducts();
@@ -37,9 +47,17 @@ export default class NewOrder extends Component {
   })
    }
    changeHandler = event =>{
-    this.setState({
-          howMany:event.target.value
-        })
+     if(event.target.value<this.state.productInfo.logicState)
+     {
+      this.setState({
+        howMany:event.target.value
+      })
+     }else{
+      this.setState({
+        howMany:this.state.productInfo.logicState
+      })
+     }
+    
   }
   getCookie(name) {
     var value = "; " + document.cookie;
@@ -53,6 +71,10 @@ export default class NewOrder extends Component {
 
 handleCloseSuccess = () =>
 {
+  if(this.state.howMany<1)
+  {
+    this.handleClose()
+  }else{
   this.state.products.map(product =>{
     if(product.id===this.state.productIdToChange)
     {
@@ -60,6 +82,8 @@ handleCloseSuccess = () =>
     }
   })
     this.handleClose()
+}
+
 }
 
 handleShow(){ 
@@ -121,7 +145,8 @@ editProductsQuantity = (product) => {
     var counter=0;
     return (
       <div>
-        <AutoCompleteText products={this.state.productsList} addToList={this.addToList}></AutoCompleteText>
+        
+        <AutoCompleteText style={{display:'none'}} products={this.state.productsList} addToList={this.addToList}></AutoCompleteText>
 
         <Table striped bordered hover>
          <thead>
@@ -151,31 +176,15 @@ editProductsQuantity = (product) => {
          </Table>
                  
   
+
  <Modal show={this.state.show} onHide={this.handleClose}>
 <Modal.Header closeButton>
 <Modal.Title>Edytuj ilosc</Modal.Title>
 </Modal.Header>
 <Modal.Body >
 <div style={{float:"left", position:"relative"}}>
-<Formik
-render={({
-            values,
-            errors,
-            touched,
-            handleBlur,
-            handleChange,
-            handleSubmit,
-            isSubmitting
-        }) =>(
-          <Form.Group style={{display:'inline',float:'left'}} >
-          <p><Form.Control type="text" name='nip' onChange={this.changeHandler} isInvalid={!!errors.nip} value={this.state.howMany}/> {"/"} {this.state.productInfo.logicState }</p>
-          <Form.Control.Feedback type="invalid">
-               {errors.nip}
-            </Form.Control.Feedback>
-        </Form.Group>
-        )}>
-        </Formik>
-{/* <div><input  type="text" value={this.state.howMany} onChange={this.changeHandler} /> { "/"} {this.state.productInfo.logicState } </div> */}
+
+{ <div><input  type="text" value={this.state.howMany} onChange={this.changeHandler} /> { "/"} {this.state.productInfo.logicState } </div> }
 </div>
 </Modal.Body>
 <Modal.Footer>
@@ -187,9 +196,12 @@ render={({
 </Button>
 </Modal.Footer>
 </Modal>
+
+<ClientListOrder products={this.state.products}></ClientListOrder>
 </div>   
 
-
     )
+    
   }
+  
 }

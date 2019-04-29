@@ -10,7 +10,7 @@ class ClientOrder extends React.Component
         return(
            
             <tr>
-            <Link to={'/newOrder/'+this.props.client.id}><th> {this.props.client.companyName}</th></Link>
+            <th onClick={() => {this.props.makeJson(this.props.client)}}> {this.props.client.companyName}</th>
             </tr>
         )
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import {Table,Button} from 'react-bootstrap';
+import {Table,Button,Modal} from 'react-bootstrap';
 import ClientOrder from './ClientOrder';
 import { conf } from '../layout/config/config'
 
@@ -18,7 +18,8 @@ import { conf } from '../layout/config/config'
         
         ]
         ,
-        draft:''
+        draft:'',
+        show:false,
     }
 
     componentDidMount = () =>
@@ -48,6 +49,15 @@ import { conf } from '../layout/config/config'
         })
   
     }
+    
+    handleClose= () =>{ 
+        this.setState({ show: false }); 
+    }
+
+    handleShow= ()=>{ 
+        this.setState({ show: true });      
+}
+
 
     getCookie(name) {
         var value = "; " + document.cookie;
@@ -56,12 +66,28 @@ import { conf } from '../layout/config/config'
       }
     
 
+
+    makeJson= (client)=>{
+        var readyJson = {
+            "products":this.props.products,
+            "principalID":client.id
+        }
+        console.log(readyJson)
+        
+    }
     render() {
         return (
+            <div>
+            <Button onClick={this.handleShow}>ta
+            </Button>
+
+            <Modal show={this.state.show} onHide={this.handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Wybierz firme</Modal.Title>
+            </Modal.Header>
+            <Modal.Body >
             
-        <div>
-            
-             {/* <Button variant="primary" onClick={this.loadClients}>Primary</Button> */}
+           
          <Table striped bordered hover >
          
          
@@ -75,13 +101,15 @@ import { conf } from '../layout/config/config'
                 
                {this.state.clients.map((filtrowanyClient)=>
                 {
-                    return <ClientOrder client={filtrowanyClient}/>
+                    return <ClientOrder client={filtrowanyClient} makeJson={this.makeJson}/>
                 })}
               
                 </tbody>
 
             </Table>
                   
+    </Modal.Body>
+    </Modal>
     </div>
         )}
 }
