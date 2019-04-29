@@ -89,6 +89,7 @@ class productList extends Component {
               <th>Ilość w paczce</th>
               <th>Kod</th>
               <th>Lokalizacja kodu</th>
+              <th>Cena</th>
               <th></th>
             </tr>
           </thead>

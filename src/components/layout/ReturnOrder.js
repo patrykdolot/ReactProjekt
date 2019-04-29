@@ -27,28 +27,21 @@ class ReturnOrder extends Component {
     usedProduct: [
 
     ],
-    palletesTemp: [
-
-    ],
-    palTemp: [
-
-    ],
-    usedProductTemp: [
-
-    ],
     draft: '',
-    dane: {},
+    dane: [],
     showSendButton: false
   }
 
   buildSelect(products) {
     var arr = [];
 
-    //console.log(this.state.products + "sssss")
-
     if (this.state.products.length > 0) {
       for (let i = 0; i < this.state.products.length; i++) {
         arr.push(<option key={i} value={this.state.products[i].staticLocation.id}>{this.state.products[i].name}</option>)
+        var t = {}
+        t.id = this.state.products[i].staticLocation.id;
+        t.name = this.state.products[i].name;
+        this.state.dane.push(t)
       }
     }
     return arr;
@@ -57,9 +50,7 @@ class ReturnOrder extends Component {
   componentDidMount = () => {
     var url = document.URL;
     this.draft = url.split('/').pop();
-
     this.getProduct()
-    //alert(a)
   }
 
   getCookie(name) {
@@ -82,10 +73,7 @@ class ReturnOrder extends Component {
     ).then(response => {
       if (response.ok) {
         response.json().then(json => {
-          //this.setState({ clients: json })
-          //this.setState({ details: json.staticLocation })
           this.setState({ products: json })
-          //console.log(json)
           console.log(this.state.products)
         })
       }
@@ -104,23 +92,12 @@ class ReturnOrder extends Component {
   }
 
   onButtonPress = () => {
-    //alert()
     this.setState({ usedProduct: "" })
-    this.setState({ usedProductTemp: "" })
     var w = {}
     w.barCode = document.getElementById('nameProduct').value;
 
-
-    // var initialArray = [1, 2, 3];
-    // var newArray = [ ...initialArray, 4 ];
-    // console.log(newArray);
-
     //this.setState({ pallete: [...this.state.pallete, w] });
     this.setState({ pallete: w });
-    this.setState({ palTemp: w });
-    //this.setState({ order: w }) //simple value
-
-    //console.log(this.state.palletes)
   }
 
   onButtonPressProduct = () => {
@@ -128,60 +105,81 @@ class ReturnOrder extends Component {
     w.idStaticProduct = +document.getElementById("typeProducktSelect").value;
     w.quanitity = +document.getElementById("quantity").value;
     this.setState({ usedProduct: [...this.state.usedProduct, w] });
-
-    var wTemp = {}
-    wTemp.name = document.getElementById('typeProducktSelect').options[document.getElementById('typeProducktSelect').selectedIndex].text;
-    wTemp.quanitity = +document.getElementById("quantity").value;
-
-    this.setState({ usedProductTemp: [...this.state.usedProductTemp, wTemp] });
-
-    // console.log(this.state.palletes)
-    //console.log(document.getElementById("typeProducktSelect").value);
   }
-
 
   endPallete = () => {
-    
-    // console.log(this.state.pallete)
+    this.setState({ dane: [] })
     var l = this.state.pallete
     l.usedProducts = this.state.usedProduct
-    console.log("asd")
-    console.log(this.state.usedProduct)
-    console.log(JSON.stringify( this.state.pallete))
-    console.log(this.state.palletes)
-    console.log("Asd")
     this.setState({ pallete: l });
     this.setState({ palletes: [...this.state.palletes, this.state.pallete] });
-    console.log(JSON.stringify( this.state.palletes))
-    
-    
-    var znz = this.state.palTemp
-    znz.usedProductss = this.state.usedProductTemp
-    // //console.log(l)
-      this.setState({ palTemp: znz });
-      this.setState({ palletesTemp: [...this.state.palletesTemp, this.state.palTemp] });
-
+    //console.log(JSON.stringify( this.state.palletes)) 
     this.setState({ showSendButton: true })
-    //this.setState({ pallete: [...this.state.pallete, z] });
-    //console.log(this.state.pallete)
-    //console.log(this.state.usedProduct)
-    // var str = JSON.stringify(this.state.palletes);
-    // console.log(str)
-    //console.log("palety")
-    //console.log(this.state.palletes)
-  }
 
+    console.log("d")
+    document.getElementById("nameProduct").value=""
+    document.getElementById("quantity").value=""
+
+  }
   sendSupply = () => {
     var order = {};
     order.typeOfSupply = document.getElementById('typeSupply').options[document.getElementById('typeSupply').selectedIndex].text;
     order.barCodeOfSupply = document.getElementById("nameSupply").value;
-    order.palletes = this.state.palletes;
+    order.palettes = this.state.palletes;
 
-    alert();
     var str = JSON.stringify(order);
     console.log(str)
     console.log(order)
-    //console.log(order)
+    this.sendToServer(order)
+  }
+
+  sendToServer(obj){
+    var cookieVal = this.getCookie("tokenWareHouse");
+
+    var nameS = conf.servername + "Supply/addSupply"
+    console.log(JSON.stringify(obj))
+    fetch( nameS, {
+        method: 'Post',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + cookieVal
+        },
+        body: JSON.stringify(obj)
+    })
+    .then(response => { 
+        //console.log(response.json() + "aa")
+        if(response.ok){
+            response.json().then(json => {
+                console.log(json);
+                if(json.Status === "Succes"){
+                  alert("Pomyślnie dodano zamówienie");
+                  window.location.reload();
+                }
+                else if (json.Status ==="oneOfBarCodeOfPalettesIsNotUnique"){
+                  alert("Kod palety jest nie unikalny");
+                  window.location.reload();
+                }
+                else if (json.Status ==="SupplyExist"){
+                  alert("Zamówienie istnieje");
+                  window.location.reload();
+                }
+                else{
+                  alert("Błąd danych");
+                  window.location.reload();
+                }
+              });
+        } else {
+            console.log("no");
+            if(response.status == 401){
+                alert("Brak uprawnień do wykonania działania");
+            }
+            else{
+                alert("Błąd podczas dodawania");
+            }
+            console.log(response.status);
+            console.log(JSON.stringify(response));
+        }
+    })
   }
 
   render() {
@@ -198,8 +196,8 @@ class ReturnOrder extends Component {
             <div class="form-group">
               <label>Rodzaj produktu</label>
               <select class="form-control" id="typeSupply">
-                <option>dostawa</option>
-                <option>zwrot</option>
+                <option>Dostawa</option>
+                <option>Zwrot</option>
               </select>
 
             </div>
@@ -255,10 +253,11 @@ class ReturnOrder extends Component {
             <h1 style={{ margin: "0 auto", textAlign: "center" }}>Szczegóły</h1>
             <br />
             
-                {this.state.palletesTemp.map((palletesTemp) => {
-                  return <ReturnOrderTab palletess={palletesTemp} />
+                {this.state.palletes.map((palletesTemp) => {
+              
+                  return <ReturnOrderTab palletess={palletesTemp} c={this.state.dane}/>
                 })}
-            
+
           </div>
           <div class="col-sm-3">
           </div>

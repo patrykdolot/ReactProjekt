@@ -12,7 +12,8 @@ import productList from './components/productList';
 import AddProduct from './components/layout/AddProduct';
 import ProductDetails from './components/layout/ProductDetails';
 import ReturnOrder from './components/layout/ReturnOrder';
-
+import OrderHistory from './components/layout/OrderHistory';
+import OrderHistoryDetails from './components/layout/OrderHistoryDetails';
 
 class App extends Component {
 
@@ -49,11 +50,13 @@ class App extends Component {
         <Route path="/productAdd" component={AddProduct}></Route> 
         <Route path="/productList" component={productList}></Route> 
         <Route path="/returnAdd" component={ReturnOrder}></Route> 
+        <Route path="/orderHistory" component={OrderHistory}></Route> 
 
         <Route  path="/editClient/:id" component={AutoCompleteText}></Route>
         <Route  path="/deleteClient/:id" component={AutoCompleteText}></Route>
 
         <Route  path="/productDetails/:id" component={ProductDetails}></Route>
+        <Route  path="/supplyDetalis/:id" component={OrderHistoryDetails}></Route>
       </Router>
       
     );

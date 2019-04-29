@@ -37,7 +37,8 @@ function Header()
       <NavDropdown  title="Magazyn" id="collasible-nav-dropdown">
         <NavDropdown.Item href="/productAdd">Dodaj produkt</NavDropdown.Item>
         <NavDropdown.Item href="/productList">Lista produktow</NavDropdown.Item>
-        <NavDropdown.Item href="/returnAdd">Dodaj zwrot</NavDropdown.Item>
+        <NavDropdown.Item href="/returnAdd">Dodaj zwrot/dostawę</NavDropdown.Item>
+        <NavDropdown.Item href="/orderHistory">Wyświetl zwroty/dostawy</NavDropdown.Item>
       </NavDropdown>
       </Nav.Item>
 

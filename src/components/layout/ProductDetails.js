@@ -148,6 +148,8 @@ class ProductDetails extends Component {
                     </div>
                 </div>
 
+
+
             </div>
 
 

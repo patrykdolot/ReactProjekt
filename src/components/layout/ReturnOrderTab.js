@@ -6,9 +6,7 @@ class ReturnOrderTab extends React.Component
 {
     render()
     {
-        //console.log(this.props.palletes.usedProducts )
         return(
-            //<div>
             <Table striped bordered hover>
 
             <thead>
@@ -21,12 +19,10 @@ class ReturnOrderTab extends React.Component
                 </tr>
             </thead>
             <tbody>
-                 {/* <tr>
-                    <th colSpan="2"> {this.props.palletes.usedProducts[0].quanitity}</th>
-                 </tr>  */}
-                 {this.props.palletess.usedProductss.map((palletess) => {
-                                        return <Detail palletess={palletess} />
-                                    })}
+
+                 {this.props.palletess.usedProducts.map((palletess) => {
+                    return <Detail palletess={palletess} nam={this.props.c} />
+                   })}
             
             </tbody>
             </Table>
@@ -37,16 +33,27 @@ class ReturnOrderTab extends React.Component
 }
 
 class Detail extends React.Component{
+    
     render()
     {
-        //console.log(this.props.product)
+        var z = this.props.nam
+        function name(idProduct) {
+            for (let i = 0; i <z.length; i++) {
+                if(idProduct === z[i].id){
+                    return z[i].name
+                }
+            }
+        }
         return(
             <tr>
-                <th>{this.props.palletess.name}</th>
+                <th>{name(this.props.palletess.idStaticProduct)}</th>
                 <th>{this.props.palletess.quanitity}</th>
             </tr>
         )
 
+        
     }
+
+
 }
 export default ReturnOrderTab

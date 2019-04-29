@@ -47,9 +47,9 @@ import Klienci from './IndexClients'
  <Card className="text-center">
  <Card.Header>Historia Dostaw</Card.Header>
  <Card.Body>
-     <Card.Title>Wyświetl dostawy</Card.Title>
+     <Card.Title>Wyświetl dostawy/zwroty</Card.Title>
      <Card.Text>
-     Lista wszystkich dostaw
+     Lista wszystkich dostaw/zwrotów
      </Card.Text>
     
      <Link exact to={'/orderHistory'}> <Button variant="primary">Idz</Button></Link>
