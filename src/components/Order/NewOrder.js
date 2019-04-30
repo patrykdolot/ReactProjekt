@@ -140,6 +140,15 @@ editProductsQuantity = (product) => {
       return product !== product1
   })});
   } 
+
+  gimmeComponent = () =>
+  {
+    console.log("wszedlem w gimmy")
+    if(this.state.products.length>0)
+    {
+      return(<ClientListOrder products={this.state.products}></ClientListOrder>)
+    }
+  }
  
   render() {
     var counter=0;
@@ -197,10 +206,12 @@ editProductsQuantity = (product) => {
 </Modal.Footer>
 </Modal>
 
-<ClientListOrder products={this.state.products}></ClientListOrder>
+{this.gimmeComponent()}
 </div>   
-
+ 
     )
+      
+      
     
   }
   
