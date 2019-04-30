@@ -1,8 +1,8 @@
 import React from 'react';
 
-import {Link} from 'react-router-dom';
+
 import {Image,NavDropdown, Nav,Navbar} from 'react-bootstrap';
-import { allResolved } from 'q';
+
 
 
 
@@ -66,21 +66,6 @@ function logoutUser(){
   window.location.reload();
 }
 
-const headerStyle =
-{
-    background: '#333',
-    color: '#fff',
-    textAlign:'center',
-    padding:'10px'
-}
-
-const linkStyle= {
-
-    color: '#fff',
-    textDecoration: 'none',
-    padding: '5px'
-
-}
 
 
 export default Header;

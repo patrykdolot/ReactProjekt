@@ -37,7 +37,7 @@ import {Card,Button,CardDeck} from 'react-bootstrap';
         Formularz do dodawania zamówienia
         </Card.Text>
        
-        <Link exact to={'/orderAdd'}> <Button variant="primary">Idz</Button></Link>
+        <Link exact to={'/newOrder'}> <Button variant="primary">Idz</Button></Link>
     </Card.Body>
     
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import './config/config';
 import './css/AddProductstyle.css';
 import {conf} from './config/config'
@@ -80,7 +80,7 @@ function getData() {
     var barCodeLocationProdcut = document.getElementById('barCodeLocationProdcut').value;
     var quantityPack = document.getElementById('quantityPack').value;
 
-    if(parseInt(quantityProduct)%parseInt(quantityPack) != 0){
+    if(parseInt(quantityProduct)%parseInt(quantityPack) !== 0){
         alert("Podano złą ilość na palecie i w paczce")
         return
     }
@@ -123,7 +123,7 @@ function getData() {
         if(response.ok){
             response.json().then(json => {
                 console.log(json);
-                var dateExpired = new Date(json.expirationDate);       
+    
                 //console.log(dateExpired);
                 //document.cookie = `tokenWareHouse=${json.token}; expires=${dateExpired.toGMTString()}`;
                 alert("Pomyślnie dodano produkt");
@@ -131,7 +131,7 @@ function getData() {
               });
         } else {
             console.log("no");
-            if(response.status == 401){
+            if(response.status === 401){
                 alert("Brak uprawnień do wykonania działania");
                 //document.getElementById('user').value ="";
                 //document.getElementById('pass').value ="";
@@ -148,7 +148,7 @@ function getData() {
 function getCookie(name) {
     var value = "; " + document.cookie;
     var parts = value.split("; " + name + "=");
-    if (parts.length == 2) return parts.pop().split(";").shift();
+    if (parts.length === 2) return parts.pop().split(";").shift();
   }
 
 export default AddProduct

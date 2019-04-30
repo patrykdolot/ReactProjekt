@@ -1,6 +1,4 @@
 import React from 'react'
-import { Link } from "react-router-dom"
-import {Card,Button,CardDeck} from 'react-bootstrap';
 import './css/loginstyle.css'
 import './config/config'
 import {conf} from './config/config'
@@ -76,7 +74,7 @@ function getData() {
               });
         } else {
             console.log("no");
-            if(response.status == 401){
+            if(response.status === 401){
                 alert("Błędne dane do logowania");
                 document.getElementById('user').value ="";
                 document.getElementById('pass').value ="";

@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import { conf } from './config/config'
 import ProductDetailsTab from './ProductDetailsTab'
-import { Table, Button } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
 class ProductDetails extends Component {
 
-    constructor() {
-        super();
-    }
+
 
     state = {
         clients: [
@@ -37,7 +35,7 @@ class ProductDetails extends Component {
     getCookie(name) {
         var value = "; " + document.cookie;
         var parts = value.split("; " + name + "=");
-        if (parts.length == 2) return parts.pop().split(";").shift();
+        if (parts.length === 2) return parts.pop().split(";").shift();
     }
 
     loadClients = () => {
@@ -68,7 +66,7 @@ class ProductDetails extends Component {
             }
             else {
                 console.log("no");
-                if (response.status == 401) {
+                if (response.status === 401) {
                     alert("Brak uprawnień do wykonania działania");
                 }
                 else {
