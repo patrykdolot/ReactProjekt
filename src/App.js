@@ -11,6 +11,7 @@ import Login from './components/layout/Login';
 import productList from './components/productList';
 import AddProduct from './components/layout/AddProduct';
 import ProductDetails from './components/layout/ProductDetails';
+
 import ReturnOrder from './components/layout/ReturnOrder';
 import OrderHistory from './components/layout/OrderHistory';
 import OrderHistoryDetails from './components/layout/OrderHistoryDetails';
@@ -18,6 +19,8 @@ import WorkerList from './components/layout/WorkerList';
 import NewClient from './components/Client/NewClient'
 import NewOrder from './components/Order/NewOrder'
 import ClientOrder from './components/Order/ClientOrder'
+
+
 
 class App extends Component {
 
@@ -27,8 +30,8 @@ class App extends Component {
     var re = new RegExp('[; ]'+cookie+'=([^\\s;]*)');
     var cookieVal = unescape((' '+document.cookie).match(re));
 
-    //console.log("a" + cookieVal + "a");
-    if(cookieVal == "null"){
+    if(cookieVal === "null"){
+
       return(
         <Router>           
           <Route component={Login} exact/>
@@ -57,8 +60,10 @@ class App extends Component {
         <Route path="/productAdd" component={AddProduct}></Route> 
         <Route path="/productList" component={productList}></Route> 
 
+
         <Route path="/returnAdd" component={ReturnOrder}></Route> 
         <Route path="/orderHistory" component={OrderHistory}></Route> 
+
 
         <Route path="/returnAdd" component={IndexWarehouse}></Route> 
 
@@ -66,6 +71,7 @@ class App extends Component {
         <Route  path="/deleteClient/:id" component={AutoCompleteText}></Route>
 
         <Route  path="/productDetails/:id" component={ProductDetails}></Route>
+
 
         <Route  path="/supplyDetalis/:id" component={OrderHistoryDetails}></Route>
 
@@ -75,6 +81,7 @@ class App extends Component {
         <Route path="/selectClient" component={ClientOrder}></Route>
         <Route  path="/newOrder" component={NewOrder}></Route>
         
+
 
       </Router>
       

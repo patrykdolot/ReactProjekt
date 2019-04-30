@@ -9,8 +9,15 @@ class ClientOrder extends React.Component
       
         return(
            
-            <tr>
-            <th onClick={() => {this.props.makeJson(this.props.client)}}> {this.props.client.companyName}</th>
+
+            <tr onClick={() => {this.props.makeJson(this.props.client)}} >
+
+            <th> {this.props.client.companyName}</th>
+            <th> {this.props.client.nip}</th>
+            <th> {this.props.client.zipCode}</th>
+            <th> {this.props.client.address}</th>
+            <th> {this.props.client.phoneNo}</th>
+
             </tr>
         )
 

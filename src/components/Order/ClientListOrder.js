@@ -4,6 +4,8 @@ import {Table,Button,Modal} from 'react-bootstrap';
 import ClientOrder from './ClientOrder';
 import { conf } from '../layout/config/config'
 
+import { Redirect,withRouter } from 'react-router-dom'
+
 
  class ClientListOrder extends Component {
 
@@ -66,22 +68,47 @@ import { conf } from '../layout/config/config'
       }
     
 
+      sendToServer= (json) =>{
+        var nameS = conf.servername + "order/make"
+        
+        fetch(nameS,{
+          method: 'POST',
+          headers:{
+              "Content-Type":'application/json',
+              'Authorization': 'Bearer ' + this.getCookie("tokenWareHouse")
+          },
+          body:JSON.stringify(json)
+      }
+      ).then(response => {
+          if(response.ok) {
+            //  alert("Pomyslnie zapisano na serwer")
+           this.wrocDoMenu()
+          }
+      })
+      }
 
     makeJson= (client)=>{
         var readyJson = {
             "products":this.props.products,
             "principalID":client.id
         }
-        console.log(readyJson)
+
+        this.sendToServer(readyJson)
         
+    }
+    wrocDoMenu = () =>{
+        alert("robie powrot")
+        return <Redirect to='/clientList'></Redirect>
     }
     render() {
         return (
-            <div>
-            <Button onClick={this.handleShow}>ta
+            <div style={{textAlign:"center"}}>
+            <Button onClick={this.handleShow}>Akceptuj zamówienie
             </Button>
 
-            <Modal show={this.state.show} onHide={this.handleClose}>
+            <Modal show={this.state.show} onHide={this.handleClose}
+            size="lg">
+
             <Modal.Header closeButton>
               <Modal.Title>Wybierz firme</Modal.Title>
             </Modal.Header>
@@ -93,7 +120,11 @@ import { conf } from '../layout/config/config'
          
             <thead >
                 <tr>
-                <th>Nazwa firmy</th>
+                <th>Company Name</th>
+                <th>Nip</th>
+                <th>Zip Code</th>
+                <th>Adress</th>
+                <th>Phone Number</th>
                 </tr>
             </thead>
 
@@ -113,4 +144,5 @@ import { conf } from '../layout/config/config'
     </div>
         )}
 }
-export default ClientListOrder
+
+export default withRouter(ClientListOrder)
