@@ -38,13 +38,6 @@ function Login(){
     )
 }
 
-// window.onload=function(){
-//     var el = document.getElementById('loginButton');
-//     if(el){
-//         el.addEventListener('click', getData, false);
-//     }
-//    // document.getElementById("loginButton").addEventListener("click", getData);
-// }
 
 function getData() {
     var login = document.getElementById('user').value;
@@ -73,10 +66,12 @@ function getData() {
         //console.log(response.json() + "aa")
         if(response.ok){
             response.json().then(json => {
-                console.log(json);
+                //console.log(json.user.authorities[0].name);
+                //alert(json.user.authorities[0].name)
                 var dateExpired = new Date(json.expirationDate);       
                 //console.log(dateExpired);
                 document.cookie = `tokenWareHouse=${json.token}; expires=${dateExpired.toGMTString()}`;
+                document.cookie = `role=${json.user.authorities[0].name}; expires=${dateExpired.toGMTString()}`;
                 window.location.reload();
               });
         } else {

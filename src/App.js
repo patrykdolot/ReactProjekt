@@ -14,6 +14,7 @@ import ProductDetails from './components/layout/ProductDetails';
 import ReturnOrder from './components/layout/ReturnOrder';
 import OrderHistory from './components/layout/OrderHistory';
 import OrderHistoryDetails from './components/layout/OrderHistoryDetails';
+import WorkerList from './components/layout/WorkerList';
 
 class App extends Component {
 
@@ -57,6 +58,8 @@ class App extends Component {
 
         <Route  path="/productDetails/:id" component={ProductDetails}></Route>
         <Route  path="/supplyDetalis/:id" component={OrderHistoryDetails}></Route>
+
+        <Route  path="/WorkerList" component={WorkerList}></Route>
       </Router>
       
     );
