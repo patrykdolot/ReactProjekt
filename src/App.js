@@ -23,6 +23,7 @@ class App extends Component {
     var cookie = "tokenWareHouse"
     var re = new RegExp('[; ]'+cookie+'=([^\\s;]*)');
     var cookieVal = unescape((' '+document.cookie).match(re));
+
     //console.log("a" + cookieVal + "a");
     if(cookieVal == "null"){
       return(

@@ -131,7 +131,6 @@ class Product extends React.Component {
                 this.build()
             ],
             actions: [
-
                 Dialog.CancelAction(),
                 Dialog.OKAction(() => {
                     this.edit()
