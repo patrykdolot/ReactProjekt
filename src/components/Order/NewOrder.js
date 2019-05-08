@@ -155,7 +155,9 @@ editProductsQuantity = (product) => {
     var counter=0;
     return (
       <div>
-        
+          <nav class="navbar navbar-light bg-light">
+                            <span class="navbar-brand mb-0 h1 text-center" id="naglowek">Dodawanie nowego zamówienia</span>
+                        </nav>
         <AutoCompleteText style={{display:'none'}} products={this.state.productsList} addToList={this.addToList}></AutoCompleteText>
 
         <Table striped bordered hover>

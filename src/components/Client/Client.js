@@ -23,7 +23,7 @@ class Client extends React.Component
             <th> {this.props.client.zipCode}</th>
             <th> {this.props.client.address}</th>
             <th> {this.props.client.phoneNo}</th>
-            <th><Link to={'/ordersClient/'+this.props.client.id}> <Button variant="info">Zamówienia</Button></Link> <Link to={'/editClient/'+this.props.client.id}><Button variant="success">Edytuj</Button> </Link></th>
+            <th><Link to={'/ordersClient/'+this.props.client.id}> <Button variant="info">Zamówienia</Button></Link> </th>
             </tr>
         )
 

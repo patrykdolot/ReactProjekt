@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
 import {Table,Button,Modal} from 'react-bootstrap';
 import ClientOrder from './ClientOrder';
 import { conf } from '../layout/config/config'
 
-import { Redirect,withRouter } from 'react-router-dom'
+import { Route,Redirect,withRouter } from 'react-router-dom'
 
 
  class ClientListOrder extends Component {
@@ -81,7 +80,7 @@ import { Redirect,withRouter } from 'react-router-dom'
       }
       ).then(response => {
           if(response.ok) {
-            //  alert("Pomyslnie zapisano na serwer")
+            alert("Pomyslnie zapisano na serwer")
            this.wrocDoMenu()
           }
       })
@@ -92,16 +91,20 @@ import { Redirect,withRouter } from 'react-router-dom'
             "products":this.props.products,
             "principalID":client.id
         }
-
-        this.sendToServer(readyJson)
+        
+     this.sendToServer(readyJson)
         
     }
+
+ 
+      
+
     wrocDoMenu = () =>{
-        alert("robie powrot")
-        return <Redirect to='/clientList'></Redirect>
+        this.props.history.push('/orderList') 
     }
     render() {
         return (
+            <Route render={({ history}) => (
             <div style={{textAlign:"center"}}>
             <Button onClick={this.handleShow}>Akceptuj zamówienie
             </Button>
@@ -138,10 +141,11 @@ import { Redirect,withRouter } from 'react-router-dom'
                 </tbody>
 
             </Table>
-                  
+         
     </Modal.Body>
     </Modal>
     </div>
+            )} />
         )}
 }
 

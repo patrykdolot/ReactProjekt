@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
 import {Table,Button} from 'react-bootstrap';
-import Client from './Client';
 import { conf } from '../layout/config/config'
-
-
- class ClientList extends Component {
-
-
-
+import Order from './Order'
+ class OrdersList extends Component {
 
     state = {
-        clients:[
+        orders:[
         
         ]
         ,
@@ -19,13 +14,13 @@ import { conf } from '../layout/config/config'
 
     componentDidMount = () =>
     {
-       this.loadClients();
+       this.loadOrders();
     }
 
-    loadClients =  ()  =>
+    loadOrders =  ()  =>
     {
         
-        var nameS = conf.servername + "client/findAll"
+        var nameS = conf.servername + "order/findAllOrderByDateDsc"
         
           fetch(nameS,{
             method: 'GET',
@@ -36,7 +31,8 @@ import { conf } from '../layout/config/config'
         }
         ).then(response => {
             if(response.ok) {
-                response.json().then(json => this.setState({clients:json}))
+              
+                response.json().then(json => this.setState({orders:json}))
             }
         })
   
@@ -58,7 +54,7 @@ import { conf } from '../layout/config/config'
             
         <div>
               <nav class="navbar navbar-light bg-light">
-                            <span class="navbar-brand mb-0 h1 text-center" id="naglowek">Lista klientow</span>
+                            <span class="navbar-brand mb-0 h1 text-center" id="naglowek">Lista zamowien</span>
                         </nav>
          <Table striped bordered hover >
          
@@ -67,26 +63,27 @@ import { conf } from '../layout/config/config'
                 <tr>
                 <th>#</th>
                 <th>Nazwa firmy</th>
-                <th>Nip</th>
-                <th>Kod pocztowy</th>
-                <th>Adres</th>
-                <th>Numer telefonu</th>
+                <th>Data</th>
+                <th>Liczba produktow</th>
+                <th>Ilosc produktow</th>
+                <th>Cena</th>
                 <th></th>
                 </tr>
             </thead>
 
             <tbody>
                 
-               {this.state.clients.map((filtrowanyClient)=>
+               {this.state.orders.map((order)=>
                 {
-                    return <Client client={filtrowanyClient} id={this.props.match.params.id}/>
+                    return <Order order={order}/>
                 })}
               
                 </tbody>
 
             </Table>
-                   {console.log(this.props.match.params.id)} 
     </div>
         )}
-}
-export default ClientList
+
+
+}export default OrdersList
+

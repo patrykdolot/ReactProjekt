@@ -11,7 +11,7 @@ import Login from './components/layout/Login';
 import productList from './components/productList';
 import AddProduct from './components/layout/AddProduct';
 import ProductDetails from './components/layout/ProductDetails';
-
+import OrdersList from './components/Order/OrdersList'
 import ReturnOrder from './components/layout/ReturnOrder';
 import OrderHistory from './components/layout/OrderHistory';
 import OrderHistoryDetails from './components/layout/OrderHistoryDetails';
@@ -19,6 +19,7 @@ import WorkerList from './components/layout/WorkerList';
 import NewClient from './components/Client/NewClient'
 import NewOrder from './components/Order/NewOrder'
 import ClientOrder from './components/Order/ClientOrder'
+import ClientOrders from './components/Client/ClientOrders'
 
 
 
@@ -51,10 +52,11 @@ class App extends Component {
         <Route path="/warehouse" component={IndexWarehouse}></Route> 
 
         <Route path="/clientAdd" component={NewClient}></Route> 
+
         <Route path="/clientList/:id" component={ClientList}></Route> 
+        <Route path="/ordersClient/:id" component={ClientOrders}></Route> 
         <Route exact path="/clientList" component={ClientList}></Route> 
-        <Route path="/orderAdd" component={IndexWarehouse}></Route> 
-        <Route path="/orderList" component={IndexWarehouse}></Route> 
+        <Route path="/orderList" component={OrdersList}></Route> 
 
 
         <Route path="/productAdd" component={AddProduct}></Route> 
@@ -81,7 +83,8 @@ class App extends Component {
         <Route path="/selectClient" component={ClientOrder}></Route>
         <Route  path="/newOrder" component={NewOrder}></Route>
         
-
+    
+       
 
       </Router>
       
