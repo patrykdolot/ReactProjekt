@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Table,Button} from 'react-bootstrap';
 import { conf } from '../layout/config/config'
+import Order from './Order'
 
  class ClientOrders extends Component {
 
@@ -23,7 +24,7 @@ import { conf } from '../layout/config/config'
         var nameS = conf.servername + "order/findAllByPrincipal"
         
           fetch(nameS,{
-            method: 'GET',
+            method: 'POST',
             headers:{
                 "Content-Type":'application/json',
                 'Authorization': 'Bearer ' + this.getCookie("tokenWareHouse")
@@ -74,10 +75,15 @@ import { conf } from '../layout/config/config'
 
             <tbody>
                 
-               {/* {this.state.orders.map((order)=>
+               {this.state.orders.map((order)=>
                 {
-                    return <Order order={order}/>
-                })} */}
+                    if(this.state.orders.length<1){
+                        return <div>Brak zamowien</div>
+                    }else{
+                     return <Order order={order}/>
+                    }
+                    
+                })}
               
                 </tbody>
 

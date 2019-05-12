@@ -20,6 +20,7 @@ import NewClient from './components/Client/NewClient'
 import NewOrder from './components/Order/NewOrder'
 import ClientOrder from './components/Order/ClientOrder'
 import ClientOrders from './components/Client/ClientOrders'
+import OrderDetails from './components/Order/OrderDetails'
 
 
 
@@ -48,8 +49,8 @@ class App extends Component {
         <Header></Header>
         
         <Route path="/" component={Index} exact/>
-        <Route path="/clients" component={IndexClients}></Route>
-        <Route path="/warehouse" component={IndexWarehouse}></Route> 
+        <Route path="/clients" component={IndexClients} exact ></Route>
+        <Route path="/warehouse" component={IndexWarehouse} exact></Route> 
 
         <Route path="/clientAdd" component={NewClient}></Route> 
 
@@ -67,7 +68,6 @@ class App extends Component {
         <Route path="/orderHistory" component={OrderHistory}></Route> 
 
 
-        <Route path="/returnAdd" component={IndexWarehouse}></Route> 
 
         <Route  path="/editClient/:id" component={AutoCompleteText}></Route>
         <Route  path="/deleteClient/:id" component={AutoCompleteText}></Route>
@@ -82,6 +82,11 @@ class App extends Component {
 
         <Route path="/selectClient" component={ClientOrder}></Route>
         <Route  path="/newOrder" component={NewOrder}></Route>
+
+        <Route  path="/orderInfo/:id" component={OrderDetails}></Route>
+
+
+
         
     
        

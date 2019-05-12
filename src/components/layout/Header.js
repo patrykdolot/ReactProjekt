@@ -27,7 +27,7 @@ function Header()
       <NavDropdown  title="Klienci" id="collasible-nav-dropdown">
         <NavDropdown.Item href="/clientAdd">Dodaj klienta</NavDropdown.Item>
         <NavDropdown.Item href="/clientList">Lista klientow</NavDropdown.Item>
-        <NavDropdown.Item href="/orderAdd">Dodaj zamówienie</NavDropdown.Item>
+        <NavDropdown.Item href="/newOrder">Dodaj zamówienie</NavDropdown.Item>
         <NavDropdown.Item href="/orderList">Lista zamówień</NavDropdown.Item>
       </NavDropdown>
       </Nav.Item>

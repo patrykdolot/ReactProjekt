@@ -1,9 +1,14 @@
 import React from 'react'
 import {Button} from 'react-bootstrap';
 import {Link } from "react-router-dom"
-import {conf} from "../layout/config/config"
+import {conf} from '../layout/config/config'
+
 class Order extends React.Component
 {
+    state = {
+        pdf:''
+    }
+    
     loadFaktura =  (id)  =>
     {
         
@@ -48,6 +53,7 @@ class Order extends React.Component
         var parts = value.split("; " + name + "=");
         if (parts.length === 2) return parts.pop().split(";").shift();
       }
+  
     getStyles = () =>
     {
         if(this.props.client.id===this.props.id)
