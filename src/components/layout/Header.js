@@ -12,10 +12,10 @@ function Header()
 
     return(
   
-   
+      // ./images/logo.png
             
   <Navbar collapseOnSelect expand="lg"  variant="dark" style={{background: '#225AF0'}}>
-  <Navbar.Brand href="/"><Image  style={{width:'2em',height:'2em'}} src={require('./images/logo.png')}/>
+  <Navbar.Brand href="/"><Image  style={{width:'5em',height:'2em'}} src={require('./images/warehouse.png')}/>
 </Navbar.Brand>
 
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />

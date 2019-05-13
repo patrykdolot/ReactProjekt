@@ -7,7 +7,7 @@ function Login(){
     return (
         <div id="login">
             <h3 class="text-center text-white pt-5">Magazyn</h3>
-            <img src={require('./images/warehouse.png')} id="icon" alt="User Icon" />
+            <img style={{width:'30%'}} src={require('./images/warehouse.png')} id="icon" alt="User Icon" />
             <div class="container">
                 <div id="login-row" class="row justify-content-center align-items-center">
                     <div id="login-column" class="col-md-6">

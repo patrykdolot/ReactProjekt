@@ -74,7 +74,7 @@ class Order extends React.Component
             <th> {this.props.order.amountOfArticles}</th>
             <th> {this.props.order.productsCount}</th>
             <th> {this.props.order.price}</th>
-            { <th><Link to={'/orderInfo/'+this.props.order.id}> <Button variant="info">Szczegoly</Button></Link> <Link to={'/deleteOrder/'+this.props.order.id}><Button variant="danger">Usun</Button> </Link><Button onClick={()=>{this.loadFaktura(this.props.order.id)}} variant="primary">Faktura</Button></th> }
+            { <th><Link to={'/orderInfo/'+this.props.order.id}> <Button variant="info">Szczegoly</Button></Link><Button onClick={()=>{this.loadFaktura(this.props.order.id)}} variant="primary">Faktura</Button></th> }
             </tr>
         )
 

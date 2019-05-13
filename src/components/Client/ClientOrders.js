@@ -34,7 +34,7 @@ import Order from './Order'
         ).then(response => {
             if(response.ok) {
               
-                response.json().then(json => this.setState({orders:json}))
+                response.json().then(json => {if(json.length<1){alert("Brak zamowien")}else this.setState({orders:json})})
             }
         })
   

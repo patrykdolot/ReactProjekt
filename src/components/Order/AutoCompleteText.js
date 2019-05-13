@@ -95,6 +95,7 @@ import onClickOutside from "react-onclickoutside";
      }
 
      onItemCliked = (item) => {
+       
            this.setState({inputValue:''})
            this.setState({suggestions:[]})
            this.setState({product:item})
